@@ -42,17 +42,17 @@ def max_avg_subarray_faster(nums: list[int], k: int) -> float:
     if k == 1:
         return max(nums)
     else:
-        avg = sum([nums[i] for i in range(0, len(nums)-k+1)])/k
+        avg = sum([nums[i] for i in range(0, k)])/k
         max_avg = max(avg, max_avg)
-        count = 0
-        while count < len(nums) - k: # figure out why this is the bounds & test case 1 overshooting
-            avg -= nums[count]/k
-            avg += nums[k+count]/k
-            count += 1
+        i = 0
+        while i < len(nums) - k:
+            avg -= nums[i]/k
+            avg += nums[i+k]/k
             max_avg = max(avg, max_avg)
+            i += 1
     return max_avg
 
 
 
 
-print(max_avg_subarray_faster([5, 3, 7], 2))
+print(max_avg_subarray_faster([1,12,-5,-6,50,3], 4))
